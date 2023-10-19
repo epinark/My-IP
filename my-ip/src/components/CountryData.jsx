@@ -1,5 +1,5 @@
 import React from "react";
-// import Time from "../components/Time.jsx";
+import Time from "../components/Time.jsx";
 import { useState, useEffect } from "react";
 
 function CountryData({ code, region, ipError, ipData }) {
@@ -39,7 +39,7 @@ function CountryData({ code, region, ipError, ipData }) {
       )}
       <p>Your IP Address is: {ipData && ipData.ip}</p>
 
-      {/* <Time /> */}
+      <Time />
     </div>
   );
 }
