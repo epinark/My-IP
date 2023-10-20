@@ -1,9 +1,19 @@
+import { useState, useEffect } from "react";
 import { DateTime } from "luxon";
 
 function Time() {
-  const now = DateTime.now();
-  const date = now.toLocaleString(DateTime.DATE_SHORT);
-  const time = now.toLocaleString(DateTime.TIME_24_SIMPLE);
+  const [currentTime, setCurrentTime] = useState(DateTime.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(DateTime.now());
+    }, 60000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const date = currentTime.toLocaleString(DateTime.DATE_SHORT);
+  const time = currentTime.toLocaleString(DateTime.TIME_24_SIMPLE);
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-wrap items-center">

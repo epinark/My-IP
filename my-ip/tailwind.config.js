@@ -13,8 +13,10 @@ export default {
         'red': '#A2678A'
       },
       boxShadow: {
-        'custom': '0 4px 10px rgba(0, 0, 0, 0.6)',
+        'custom': '0 0 10px 4px rgba(0, 0, 255, 0.6)',
       },
+
+
     },
   },
   plugins: [],
