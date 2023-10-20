@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 function App() {
   const [ipData, setIpData] = useState();
   const [ipError, setIpError] = useState();
-  const [city, setCity] = useState("");
 
   const apiKey = import.meta.env.VITE_IPIFY_KEY;
 
@@ -19,7 +18,6 @@ function App() {
           throw new Error(`Request failed ${res.status} ${res.statusText}`);
         const data = await res.json();
         setIpData(data);
-        setCity(data.location.city);
       } catch (error) {
         setIpError(error);
       }
@@ -43,7 +41,6 @@ function App() {
                 ipData={ipData}
                 ipError={ipError}
                 code={ipData.location.country}
-                region={city}
               />
             )}
           </div>
