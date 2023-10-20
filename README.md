@@ -4,7 +4,8 @@ It is a small one-page application that provides the user with information about
 ## Features
 
 - **IP Address:** Instantly see the user's current IP address.
-- **Location on Map:** View the user's approximate location on the map.
-- **Country Details:** Find out more information about the user's country, such as the country code, region, and more.
+- **Location on Map:** View the user's approximate location on the map with Leaflet.
+- **Country Details:** Find out more information about the user's country, region, and more.
 
 ## Demo
+(https://showmyplace.netlify.app/)
