@@ -28,6 +28,7 @@ function Map() {
       {position && (
         <MapContainer
           id="map"
+          className="h-64"
           center={position}
           zoom={13}
           scrollWheelZoom={false}
