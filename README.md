@@ -1,5 +1,5 @@
 # What is my IP?
-It is a small one-page application that provides the user with information about their current IP address, location, and some additional details about their country.
+A small one-page React application that provides the user with information about their current IP address, location, and some additional details about their country.
 
 ## Features
 
