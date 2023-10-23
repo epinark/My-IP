@@ -7,5 +7,5 @@ A small one-page React application that provides the user with information about
 - **Location on Map:** View the user's approximate location on the map with Leaflet.
 - **Country Details:** Find out more information about the user's country, region, and more.
 
-## Demo
-(https://showmyplace.netlify.app/)
+## Demo 🚀
+Check out the live demo of the What's my IP App [here](https://showmyplace.netlify.app/).
