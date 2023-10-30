@@ -1,14 +1,16 @@
 import Map from "./components/Map.jsx";
 import CountryData from "./components/CountryData.jsx";
 import { useState, useEffect } from "react";
+import Loading from "./components/Loading.jsx";
 
 function App() {
   const [ipData, setIpData] = useState();
   const [ipError, setIpError] = useState();
+  const [loading, setLoading] = useState(true);
 
   const apiKey = import.meta.env.VITE_IPIFY_KEY;
 
-  const url = `https://geo.ipify.org/api/v2/country?apiKey=${apiKey}`;
+  const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}`;
 
   useEffect(() => {
     async function fetchData() {
@@ -18,6 +20,7 @@ function App() {
           throw new Error(`Request failed ${res.status} ${res.statusText}`);
         const data = await res.json();
         setIpData(data);
+        setLoading(false);
       } catch (error) {
         setIpError(error);
       }
@@ -26,6 +29,9 @@ function App() {
   }, [url]);
   if (ipError) {
     return <p>Something went wrong {ipError.message}</p>;
+  }
+  if (loading) {
+    return <Loading />;
   }
   return (
     <div className="min-h-screen flex justify-center items-center">
@@ -41,6 +47,7 @@ function App() {
                 ipData={ipData}
                 ipError={ipError}
                 code={ipData.location.country}
+                city={ipData.location.city}
               />
             )}
           </div>

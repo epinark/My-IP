@@ -17,7 +17,7 @@ function Time() {
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-wrap items-center">
-        <span class="material-icons">calendar_today</span>
+        <span className="material-icons">calendar_today</span>
         <span className="pl-1">Today is {date}</span>
       </div>
       <div className="flex flex-row items-center p-4">

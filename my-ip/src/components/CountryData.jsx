@@ -1,8 +1,7 @@
-import React from "react";
 import Time from "../components/Time.jsx";
 import { useState, useEffect } from "react";
 
-function CountryData({ code, region, ipData }) {
+function CountryData({ code, city, ipData }) {
   const [information, setInformation] = useState();
   const [countryError, setCountryError] = useState();
 
@@ -41,8 +40,7 @@ function CountryData({ code, region, ipData }) {
               alt={information[0].flags.alt}
             />
             <h5>
-              You are currently located in {ipData.location.region},{" "}
-              {information[0].name.common}
+              You are currently located in {city}, {information[0].name.common}
             </h5>
           </div>
         </>
