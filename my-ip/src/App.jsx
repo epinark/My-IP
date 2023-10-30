@@ -40,17 +40,20 @@ function App() {
           <div className="w-full h-full  md:w-1/2">
             <Map />
           </div>
-
-          <div className="w-full md:w-1/2 p-2">
-            {ipData && (
-              <CountryData
-                ipData={ipData}
-                ipError={ipError}
-                code={ipData.location.country}
-                city={ipData.location.city}
-              />
-            )}
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="w-full md:w-1/2 p-2">
+              {ipData && (
+                <CountryData
+                  ipData={ipData}
+                  ipError={ipError}
+                  code={ipData.location.country}
+                  city={ipData.location.city}
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
