@@ -6,6 +6,8 @@ import Loading from "./components/Loading.jsx";
 function App() {
   const [position, setPosition] = useState();
   const [city, setCity] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [countryCode, setCountryCode] = useState(null);
 
   useEffect(() => {
     const options = {
@@ -23,7 +25,11 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           const city = data.address.city;
+          const country = data.address.country;
+          const countryCode = data.address.country_code;
           setCity(city);
+          setCountry(country);
+          setCountryCode(countryCode);
         })
         .catch((error) => {
           console.error("Error fetching city:", error);
@@ -81,7 +87,7 @@ function App() {
                 <CountryData
                   ipData={ipData}
                   ipError={ipError}
-                  code={ipData.location.country}
+                  code={countryCode}
                   city={city}
                 />
               )}
