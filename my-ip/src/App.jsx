@@ -4,6 +4,39 @@ import { useState, useEffect } from "react";
 import Loading from "./components/Loading.jsx";
 
 function App() {
+  const [position, setPosition] = useState();
+  const [city, setCity] = useState(null);
+
+  useEffect(() => {
+    const options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    function success(pos) {
+      setPosition([pos.coords.latitude, pos.coords.longitude]);
+
+      const baseUrl = "https://nominatim.openstreetmap.org/reverse?format=json";
+
+      fetch(`${baseUrl}&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const city = data.address.city;
+          setCity(city);
+        })
+        .catch((error) => {
+          console.error("Error fetching city:", error);
+        });
+    }
+
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }, []);
+
   const [ipData, setIpData] = useState();
   const [ipError, setIpError] = useState();
   const [loading, setLoading] = useState(true);
@@ -38,7 +71,7 @@ function App() {
       <div className="bg-white rounded-lg shadow-custom w-full p-4 md:w-3/4 m-3 ">
         <div className="flex flex-wrap">
           <div className="w-full h-full  md:w-1/2">
-            <Map />
+            {ipData && position && <Map position={position} />}
           </div>
           {loading ? (
             <Loading />
@@ -49,7 +82,7 @@ function App() {
                   ipData={ipData}
                   ipError={ipError}
                   code={ipData.location.country}
-                  city={ipData.location.city}
+                  city={city}
                 />
               )}
             </div>

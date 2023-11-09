@@ -28,7 +28,7 @@ function CountryData({ code, city, ipData }) {
 
   return (
     <div className="flex flex-col h-full justify-center items-center">
-      {information && ipData && ipData.ip && ipData.location.region && (
+      {information && ipData && ipData.ip && ipData.location.city && (
         <>
           <p className="bg-blue-500 rounded-3xl text-white p-3 m-2">
             Your IP Address is: {ipData && ipData.ip}
