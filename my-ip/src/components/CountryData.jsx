@@ -28,7 +28,7 @@ function CountryData({ code, city, ipData }) {
 
   return (
     <div className="flex flex-col h-full justify-center items-center">
-      {information && ipData && ipData.ip && ipData.location.city && (
+      {information && ipData && ipData.ip && city && (
         <>
           <p className="bg-blue-500 rounded-3xl text-white p-3 m-2">
             Your IP Address is: {ipData && ipData.ip}
@@ -40,7 +40,8 @@ function CountryData({ code, city, ipData }) {
               alt={information[0].flags.alt}
             />
             <h5>
-              You are currently located in {city}, {information[0].name.common}
+              You are currently located in {city && `${city}, `}
+              {information[0].name.common}
             </h5>
           </div>
         </>
