@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function CountryData({ countryCode, city, ipData, position }) {
   const [information, setInformation] = useState();
   const [countryError, setCountryError] = useState();
+  const [loading, setLoading] = useState(true);
 
   const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
 
@@ -15,8 +16,10 @@ function CountryData({ countryCode, city, ipData, position }) {
           throw new Error(`Request failed ${res.status} ${res.statusText}`);
         const data = await res.json();
         setInformation(data);
+        setLoading(false);
       } catch (error) {
         setCountryError(error);
+        setLoading(false);
       }
     }
     fetchData();
@@ -24,6 +27,10 @@ function CountryData({ countryCode, city, ipData, position }) {
 
   if (countryError) {
     return <p>{countryError.message}</p>;
+  }
+
+  if (loading) {
+    return <p>Loading country data...</p>;
   }
 
   return (
