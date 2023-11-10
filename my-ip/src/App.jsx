@@ -56,11 +56,9 @@ function App() {
           setCity(city);
           setCountry(country);
           setCountryCode(countryCode);
-          setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching city:", error);
-          setLoading(false);
         });
     }
 
