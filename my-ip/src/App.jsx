@@ -84,15 +84,19 @@ function App() {
             {ipData && position && <Map position={position} />}
           </div>
           <div className="w-full md:w-1/2 p-2">
-            {ipData && countryCode && city !== null && position && !loading && (
-              <CountryData
-                ipData={ipData}
-                ipError={ipError}
-                countryCode={countryCode}
-                city={city}
-                position={position}
-              />
-            )}
+            {ipData !== null &&
+              countryCode &&
+              city !== null &&
+              position &&
+              !loading && (
+                <CountryData
+                  ipData={ipData}
+                  ipError={ipError}
+                  countryCode={countryCode}
+                  city={city}
+                  position={position}
+                />
+              )}
             {loading && <Loading />}
           </div>
         </div>
