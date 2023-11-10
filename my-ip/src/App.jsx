@@ -96,7 +96,6 @@ function App() {
                   position={position}
                 />
               )}
-              {/* Alternatively, you can use a loading message here if countryCode or city is still null */}
               {!countryCode || !city ? <p>Loading country data...</p> : null}
             </div>
           )}
