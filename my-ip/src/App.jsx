@@ -1,7 +1,7 @@
 import Map from "./components/Map.jsx";
 import CountryData from "./components/CountryData.jsx";
-import { useState, useEffect } from "react";
 import Loading from "./components/Loading.jsx";
+import { useState, useEffect } from "react";
 
 function App() {
   const [position, setPosition] = useState();
