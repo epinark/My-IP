@@ -23,8 +23,11 @@ function App() {
         if (!res.ok)
           throw new Error(`Request failed ${res.status} ${res.statusText}`);
         const data = await res.json();
-        setIpData(data);
-        setLoading(false);
+
+        setTimeout(() => {
+          setIpData(data);
+          setLoading(false);
+        }, 2000);
       } catch (error) {
         setIpError(error);
         setLoading(false);
@@ -72,7 +75,10 @@ function App() {
   if (loading) {
     return <Loading />;
   }
-
+  console.log("ipData:", ipData);
+  console.log("position:", position);
+  console.log("countryCode:", countryCode);
+  console.log("city:", city);
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-custom w-full p-4 md:w-3/4 m-3 ">
