@@ -73,7 +73,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="main-container flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-custom w-full p-4 md:w-3/4 m-3 ">
         {loading || loadingIP ? (
           <Loading />
