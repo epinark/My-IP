@@ -72,6 +72,10 @@ function App() {
   if (loading) {
     return <Loading />;
   }
+  console.log("ipData:", ipData);
+  console.log("position:", position);
+  console.log("countryCode:", countryCode);
+  console.log("city:", city);
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-custom w-full p-4 md:w-3/4 m-3 ">
@@ -92,6 +96,8 @@ function App() {
                   position={position}
                 />
               )}
+              {/* Alternatively, you can use a loading message here if countryCode or city is still null */}
+              {!countryCode || !city ? <p>Loading country data...</p> : null}
             </div>
           )}
         </div>
