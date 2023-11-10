@@ -49,7 +49,7 @@ function App() {
 
   const apiKey = import.meta.env.VITE_IPIFY_KEY;
 
-  const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}`;
+  const url = `https://geo.ipify.org/api/v2/country?apiKey=${apiKey}`;
 
   useEffect(() => {
     async function fetchData() {
