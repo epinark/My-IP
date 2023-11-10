@@ -3,6 +3,8 @@ import CountryData from "./components/CountryData.jsx";
 import Loading from "./components/Loading.jsx";
 import { useState, useEffect } from "react";
 
+// ... (imports remain the same)
+
 function App() {
   const [ipData, setIpData] = useState();
   const [ipError, setIpError] = useState();
@@ -20,24 +22,21 @@ function App() {
     async function fetchData() {
       try {
         const res = await fetch(url);
-        if (!res.ok)
+        if (!res.ok) {
           throw new Error(`Request failed ${res.status} ${res.statusText}`);
+        }
         const data = await res.json();
-
-        setTimeout(() => {
-          setIpData(data);
-          setLoading(false);
-        }, 2000);
+        setIpData(data);
       } catch (error) {
         setIpError(error);
+      } finally {
         setLoading(false);
       }
     }
+
     fetchData();
   }, [url]);
-  if (ipError) {
-    return <p>Something went wrong {ipError.message}</p>;
-  }
+
   useEffect(() => {
     const options = {
       enableHighAccuracy: false,
@@ -72,23 +71,18 @@ function App() {
     navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
-  console.log("ipData:", ipData);
-  console.log("position:", position);
-  console.log("countryCode:", countryCode);
-  console.log("city:", city);
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-custom w-full p-4 md:w-3/4 m-3 ">
         <div className="flex flex-wrap">
           <div className="w-full h-full  md:w-1/2">
-            {loading && <Loading />}
             {ipData && position && <Map position={position} />}
           </div>
           <div className="w-full md:w-1/2 p-2">
-            {ipData !== null &&
+            {loading ? (
+              <Loading />
+            ) : (
+              ipData !== null &&
               countryCode &&
               city !== null &&
               position &&
@@ -100,8 +94,8 @@ function App() {
                   city={city}
                   position={position}
                 />
-              )}
-            {loading && <Loading />}
+              )
+            )}
           </div>
         </div>
       </div>
