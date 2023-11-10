@@ -1,10 +1,9 @@
 import Time from "../components/Time.jsx";
 import { useState, useEffect } from "react";
 
-function CountryData({ countryCode, city, ipData, position }) {
+function CountryData({ countryCode, city, ipData }) {
   const [information, setInformation] = useState();
   const [countryError, setCountryError] = useState();
-  const [loading, setLoading] = useState(true);
 
   const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
 
@@ -16,10 +15,8 @@ function CountryData({ countryCode, city, ipData, position }) {
           throw new Error(`Request failed ${res.status} ${res.statusText}`);
         const data = await res.json();
         setInformation(data);
-        setLoading(false);
       } catch (error) {
         setCountryError(error);
-        setLoading(false);
       }
     }
     fetchData();
@@ -29,35 +26,25 @@ function CountryData({ countryCode, city, ipData, position }) {
     return <p>{countryError.message}</p>;
   }
 
-  if (loading) {
-    return <p>Loading country data...</p>;
-  }
-
   return (
     <div className="flex flex-col h-full justify-center items-center">
-      {information &&
-        ipData &&
-        ipData.ip &&
-        city &&
-        countryCode &&
-        position && (
-          <>
-            <p className="bg-blue-500 rounded-3xl text-white p-3 m-2">
-              Your IP Address is: {ipData && ipData.ip}
-            </p>
-            <div className="flex flex-row items-center m-2 p-2">
-              <img
-                className="h-4 w-4 m-2"
-                src={information[0].flags.png}
-                alt={information[0].flags.alt}
-              />
-              <h5>
-                You are currently located in {city && `${city}, `}
-                {information[0].name.common}
-              </h5>
-            </div>
-          </>
-        )}
+      {information && (
+        <>
+          <p className="bg-blue-500 rounded-3xl text-white p-3 m-2">
+            Your IP Address is: {ipData && ipData.ip}
+          </p>
+          <div className="flex flex-row items-center m-2 p-2">
+            <img
+              className="h-4 w-4 m-2"
+              src={information[0].flags.png}
+              alt={information[0].flags.alt}
+            />
+            <h5>
+              You are currently located in {city}, {information[0].name.common}
+            </h5>
+          </div>
+        </>
+      )}
 
       <Time />
     </div>
