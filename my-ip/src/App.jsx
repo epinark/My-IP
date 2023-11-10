@@ -31,7 +31,8 @@ function App() {
       fetch(`${baseUrl}&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
         .then((response) => response.json())
         .then((data) => {
-          const city = data.address.city || data.address.town;
+          const city =
+            data.address.city || data.address.town || data.adress.state;
           const countryCode = data.address.country_code;
           setCity(city);
           setCountryCode(countryCode);
