@@ -1,11 +1,11 @@
 import Time from "../components/Time.jsx";
 import { useState, useEffect } from "react";
 
-function CountryData({ code, city, ipData }) {
+function CountryData({ countryCode, city, ipData, position }) {
   const [information, setInformation] = useState();
   const [countryError, setCountryError] = useState();
 
-  const url = `https://restcountries.com/v3.1/alpha/${code}`;
+  const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
 
   useEffect(() => {
     async function fetchData() {
@@ -28,24 +28,29 @@ function CountryData({ code, city, ipData }) {
 
   return (
     <div className="flex flex-col h-full justify-center items-center">
-      {information && ipData && ipData.ip && city && (
-        <>
-          <p className="bg-blue-500 rounded-3xl text-white p-3 m-2">
-            Your IP Address is: {ipData && ipData.ip}
-          </p>
-          <div className="flex flex-row items-center m-2 p-2">
-            <img
-              className="h-4 w-4 m-2"
-              src={information[0].flags.png}
-              alt={information[0].flags.alt}
-            />
-            <h5>
-              You are currently located in {city && `${city}, `}
-              {information[0].name.common}
-            </h5>
-          </div>
-        </>
-      )}
+      {information &&
+        ipData &&
+        ipData.ip &&
+        city &&
+        countryCode &&
+        position && (
+          <>
+            <p className="bg-blue-500 rounded-3xl text-white p-3 m-2">
+              Your IP Address is: {ipData && ipData.ip}
+            </p>
+            <div className="flex flex-row items-center m-2 p-2">
+              <img
+                className="h-4 w-4 m-2"
+                src={information[0].flags.png}
+                alt={information[0].flags.alt}
+              />
+              <h5>
+                You are currently located in {city && `${city}, `}
+                {information[0].name.common}
+              </h5>
+            </div>
+          </>
+        )}
 
       <Time />
     </div>

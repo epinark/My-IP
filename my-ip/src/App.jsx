@@ -24,7 +24,7 @@ function App() {
       fetch(`${baseUrl}&lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
         .then((response) => response.json())
         .then((data) => {
-          const city = data.address.city;
+          const city = data.address.town;
           const country = data.address.country;
           const countryCode = data.address.country_code;
           setCity(city);
@@ -83,12 +83,13 @@ function App() {
             <Loading />
           ) : (
             <div className="w-full md:w-1/2 p-2">
-              {ipData && (
+              {ipData && countryCode && city && position && (
                 <CountryData
                   ipData={ipData}
                   ipError={ipError}
-                  code={countryCode}
+                  countryCode={countryCode}
                   city={city}
+                  position={position}
                 />
               )}
             </div>
